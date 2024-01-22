@@ -41,6 +41,9 @@ function App() {
         }}
       >
         <div className="w-full text-[#23272A]">
+          <div className="text-white text-center font-bold text-xl mb-4">
+            Currency Converter App
+          </div>
           <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-[#23272A]">
             <form
               onSubmit={(e) => {
