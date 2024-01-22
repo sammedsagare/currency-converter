@@ -15,12 +15,21 @@ function App() {
   const swap = () => {
     setFrom(to);
     setTo(from);
-    setConvertedAmount(amount);
     setAmount(convertedAmount);
+    setConvertedAmount(amount);
+  };
+
+  const validateAmount = () => {
+    const isValid = !isNaN(amount) && parseFloat(amount) >= 0;
+    return isValid;
   };
 
   const convert = () => {
-    setConvertedAmount(amount * currencyOptions[to]);
+    if (!validateAmount()) {
+      alert("Please enter a valid positive number for the amount.");
+    } else {
+      setConvertedAmount(amount * currencyOptions[to]);
+    }
   };
 
   return (
@@ -44,8 +53,9 @@ function App() {
                   label="From"
                   amount={amount}
                   currencyOptions={options}
-                  onCurrencyChange={(currency) => setAmount(amount)}
+                  onCurrencyChange={(currency) => setFrom(currency)}
                   selectCurrency={from}
+                  onAmountChange={(amount) => setAmount(amount)}
                 />
               </div>
               <div className="relative w-full h-0.5">
@@ -63,8 +73,8 @@ function App() {
                   amount={convertedAmount}
                   currencyOptions={options}
                   onCurrencyChange={(currency) => setTo(currency)}
-                  selectCurrency={from}
-                  amountDisabled
+                  selectCurrency={to}
+                  disableAmountInput
                 />
               </div>
               <button
